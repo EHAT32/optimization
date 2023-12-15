@@ -23,6 +23,9 @@ def bitWise(func, leftX, rightX, L, accuracy = 0.01):
         x += dx
     return minVal
 
+def dichotomy(func, leftX, rightX, L, accuracy = 0.01):
+    ...
+
 # func = lambda x: np.sin(x) * (x - 1) ** 2
 # funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
 # a = -4
