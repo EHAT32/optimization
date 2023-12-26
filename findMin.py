@@ -24,12 +24,13 @@ def bitWise(func, leftX, rightX, L, accuracy = 1e-2):
     return minVal
 
 def dichotomy(func, leftX, rightX, L, accuracy = 1e-2):
-    delta = accuracy / L
+    eps = accuracy / L
+    delta = eps / 2
     a = leftX
     b = rightX
     xLeft = (a + b) / 2 - delta
     xRight = (a + b) / 2 + delta
-    while b - a > 2 * accuracy:
+    while b - a > 2 * eps:
         if func(xLeft) < func(xRight):
             b = xRight
         else:
@@ -49,14 +50,14 @@ def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
     while b - a > eps:
         ...
 
-# func = lambda x: np.sin(x) * (x - 1) ** 2
-# funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
-# a = -4
-# b = 0
+func = lambda x: np.sin(x) * (x - 1) ** 2
+funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
+a = -4
+b = 0
 
 # forDeriv = np.linspace(a, b, 5000)
 
-# L = 35
+L = 35
 
 # print(enumeration(func, a, b, L))
 # print(bitWise(func, a, b, L))
