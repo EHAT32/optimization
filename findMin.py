@@ -100,15 +100,9 @@ def parabola(func, leftX, rightX, L, accuracy = 1e-2):
                 x3 = x2
         x2 = newX
 
-        # x2 = newX
         f1 = func(x1)
         f2 = func(x2)
         f3 = func(x3)
-        # newX2 = x3
-        # while not (f1 > f2 and f2 < f3):
-        #     newX2 -= dx
-        #     f2 = func(newX2)
-
         a = f1
         b = (f2 - a) / (x2 - x1)
         c = (f3 - a - b * (x3 - x1)) / ((x3 - x1 )*(x3 - x2))
