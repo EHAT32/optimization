@@ -59,9 +59,6 @@ def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
         xRight = a + (b - a) / ratio  
     return func((a + b) / 2)
 
-def findTriple():
-    ...
-
 def parabola(func, leftX, rightX, L, accuracy = 1e-2):
     ITER_NUM = 10000
     dx = accuracy / L
@@ -109,7 +106,7 @@ def parabola(func, leftX, rightX, L, accuracy = 1e-2):
         newX = (x1 + x2) / 2 - b / (2 * c)
 
         i += 1
-    return func(newX)
+    return func((x3 + x1) / 2)
 
 func = lambda x: np.sin(x) * (x - 1) ** 2
 funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
@@ -123,5 +120,5 @@ L = 35
 # print(bitWise(func, a, b, L))
 # print(dichotomy(func, a, b, L))
 # print(goldenRatio(func, a, b, L))
-# print(parabola(func, a, b, L))
+print(parabola(func, a, b, L))
 
