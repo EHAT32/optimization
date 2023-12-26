@@ -45,10 +45,18 @@ def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
     a = leftX
     b = rightX
     eps = accuracy / L
-    xLeft = rightX - (rightX - leftX) / ratio
-    xRight = leftX + (rightX - leftX) / ratio
+    xLeft = b - (b - a) / ratio
+    xRight = a + (b - a) / ratio
     while b - a > eps:
-        ...
+        y1 = func(xLeft)
+        y2 = func(xRight)
+        if y1 >= y2:
+            a = xLeft
+        else:
+            b = xRight
+        xLeft = b - (b - a) / ratio
+        xRight = a + (b - a) / ratio  
+    return func((a + b) / 2)
 
 func = lambda x: np.sin(x) * (x - 1) ** 2
 funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
@@ -62,5 +70,6 @@ L = 35
 # print(enumeration(func, a, b, L))
 # print(bitWise(func, a, b, L))
 # print(dichotomy(func, a, b, L))
+print(goldenRatio(func, a, b, L))
 
 
