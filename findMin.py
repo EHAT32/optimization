@@ -1,6 +1,6 @@
 import numpy as np
 
-def enumeration(func, leftX, rightX, L, accuracy = 0.01):
+def enumeration(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
     x = leftX
     minVal = func(leftX)
@@ -9,7 +9,7 @@ def enumeration(func, leftX, rightX, L, accuracy = 0.01):
         x += dx
     return minVal
 
-def bitWise(func, leftX, rightX, L, accuracy = 0.01):
+def bitWise(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
     x = leftX
     minVal = func(leftX)
@@ -23,8 +23,31 @@ def bitWise(func, leftX, rightX, L, accuracy = 0.01):
         x += dx
     return minVal
 
-def dichotomy(func, leftX, rightX, L, accuracy = 0.01):
-    ...
+def dichotomy(func, leftX, rightX, L, accuracy = 1e-2):
+    delta = accuracy / L
+    a = leftX
+    b = rightX
+    xLeft = (a + b) / 2 - delta
+    xRight = (a + b) / 2 + delta
+    while b - a > 2 * accuracy:
+        if func(xLeft) < func(xRight):
+            b = xRight
+        else:
+            a = xLeft
+        xLeft = (a + b) / 2 - delta
+        xRight = (a + b) / 2 + delta
+        # print(xRight - xLeft - 2 * delta)
+    return func((a + b) / 2)
+
+def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
+    ratio = (1 + np.sqrt(5)) / 2
+    a = leftX
+    b = rightX
+    eps = accuracy / L
+    xLeft = rightX - (rightX - leftX) / ratio
+    xRight = leftX + (rightX - leftX) / ratio
+    while b - a > eps:
+        ...
 
 # func = lambda x: np.sin(x) * (x - 1) ** 2
 # funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
@@ -33,10 +56,10 @@ def dichotomy(func, leftX, rightX, L, accuracy = 0.01):
 
 # forDeriv = np.linspace(a, b, 5000)
 
-# L = np.max(np.abs(funcDeriv(forDeriv)))
-# L *= 1.1
+# L = 35
 
 # print(enumeration(func, a, b, L))
 # print(bitWise(func, a, b, L))
+# print(dichotomy(func, a, b, L))
 
 
