@@ -108,6 +108,9 @@ def parabola(func, leftX, rightX, L, accuracy = 1e-2):
         i += 1
     return func((x3 + x1) / 2)
 
+def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
+    ...
+
 func = lambda x: np.sin(x) * (x - 1) ** 2
 funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
 a = -4
