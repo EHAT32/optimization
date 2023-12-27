@@ -146,7 +146,22 @@ def newton(func, leftX, rightX, L, accuracy = 1e-2):
     return func(xk)
 
 def markwardt(func, leftX, rightX, L, accuracy = 1e-2):
-    ...
+    dx = accuracy / L
+    xk = (leftX + rightX) / 2
+    eps = 1e-5
+    mu = 1
+    first = firstDeriv(func, xk, dx)
+    second = secDeriv(func, xk, dx)
+    while abs(first) > eps:
+        xk -= first / (second + mu)
+
+        if abs(firstDeriv(func, xk, dx)) < abs(first):
+            mu *= 2
+        else:
+            mu /= 2
+        first = firstDeriv(func, xk, dx)
+        second = secDeriv(func, xk, dx)
+    return func(xk)
     
 
 # func = lambda x: np.sin(x) * (x - 1) ** 2
@@ -164,4 +179,4 @@ def markwardt(func, leftX, rightX, L, accuracy = 1e-2):
 # print(parabola(func, a, b, L))
 # print(midPoint(func, a, b, L))
 # print(newton(func, a, b, L))
-
+# print(markwardt(func, a, b, L))
