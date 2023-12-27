@@ -8,7 +8,7 @@ def enumeration(func, leftX, rightX, L, accuracy = 1e-2):
     while x < rightX:
         minVal = min(minVal, func(x))
         x += dx
-    return minVal
+    return x-dx, minVal
 
 def bitWise(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
@@ -164,6 +164,22 @@ def markwardt(func, leftX, rightX, L, accuracy = 1e-2):
     return func(xk)
     
 
+def brokenLines(func, leftX, rightX, L, accuracy = 1e-2):
+    xOpt = (leftX + rightX) / 2 + (func(leftX) - func(rightX)) / (2 * L)
+    pOpt = (func(leftX) + func(rightX)) / 2 + L * (leftX - rightX) / 2
+    delta = (func(xOpt) - pOpt)
+    while delta > accuracy:
+        x1 = xOpt + delta / (2 * L)
+        x2 = xOpt - delta / (2 * L)
+        if func(x1) < func(x2):
+            xOpt = x1
+        else:
+            xOpt = x2
+        pOpt = (func(xOpt) + pOpt) / 2
+        delta = func(xOpt) - pOpt
+
+    return func(xOpt)
+
 # func = lambda x: np.sin(x) * (x - 1) ** 2
 # funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
 # a = -4
@@ -180,3 +196,4 @@ def markwardt(func, leftX, rightX, L, accuracy = 1e-2):
 # print(midPoint(func, a, b, L))
 # print(newton(func, a, b, L))
 # print(markwardt(func, a, b, L))
+# print(brokenLines(func, a, b, L))
