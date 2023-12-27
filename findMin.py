@@ -112,7 +112,7 @@ def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
     a = leftX
     b = rightX
-    eps = 1e-3
+    eps = 1e-5
     midPoint = (a+b) / 2
     deriv = (func(midPoint + dx) - func(midPoint - dx)) / (2 * dx)
     while abs(b - a) > 2 * dx:
@@ -125,6 +125,20 @@ def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
         midPoint = (a + b) / 2
         deriv = (func(midPoint + dx) - func(midPoint - dx)) / (2 * dx)
     return func((a + b) / 2)
+
+def newton(func, leftX, rightX, L, accuracy = 1e-2):
+    dx = accuracy / L
+    eps = 1e-5
+    xk = (leftX + rightX) / 2
+    first = (func(xk + dx) - func(xk - dx)) / (2 * dx)
+    second = (func(xk + dx) - 2 * func(xk) + func(xk - dx)) / (dx ** 2)
+    while abs(first) > eps:
+        xk -= first / second
+
+        first = (func(xk + dx) - func(xk - dx)) / (2 * dx)
+        second = (func(xk + dx) - 2 * func(xk) + func(xk - dx)) / (dx ** 2)
+    return func(xk)
+
 
 # func = lambda x: np.sin(x) * (x - 1) ** 2
 # funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
@@ -140,4 +154,5 @@ def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
 # print(goldenRatio(func, a, b, L))
 # print(parabola(func, a, b, L))
 # print(midPoint(func, a, b, L))
+# print(newton(func, a, b, L))
 
