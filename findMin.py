@@ -126,19 +126,28 @@ def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
         deriv = (func(midPoint + dx) - func(midPoint - dx)) / (2 * dx)
     return func((a + b) / 2)
 
+def firstDeriv(func, x, dx):
+    return (func(x + dx) - func(x - dx)) / (2 * dx)
+
+def secDeriv(func, x, dx):
+    return (func(x + dx) - 2 * func(x) + func(x - dx)) / (dx ** 2)
+
 def newton(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
     eps = 1e-5
     xk = (leftX + rightX) / 2
-    first = (func(xk + dx) - func(xk - dx)) / (2 * dx)
-    second = (func(xk + dx) - 2 * func(xk) + func(xk - dx)) / (dx ** 2)
+    first = firstDeriv(func, xk, dx)
+    second = secDeriv(func, xk, dx)
     while abs(first) > eps:
         xk -= first / second
 
-        first = (func(xk + dx) - func(xk - dx)) / (2 * dx)
-        second = (func(xk + dx) - 2 * func(xk) + func(xk - dx)) / (dx ** 2)
+        first = firstDeriv(func, xk, dx)
+        second = secDeriv(func, xk, dx)
     return func(xk)
 
+def markwardt(func, leftX, rightX, L, accuracy = 1e-2):
+    ...
+    
 
 # func = lambda x: np.sin(x) * (x - 1) ** 2
 # funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
