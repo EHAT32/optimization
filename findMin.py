@@ -60,9 +60,7 @@ def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
     return func((a + b) / 2)
 
 def parabola(func, leftX, rightX, L, accuracy = 1e-2):
-    ITER_NUM = 10000
     dx = accuracy / L
-    i = 0
     x1 = leftX
     x3 = rightX
     x2 = (x1 + x3) / 2
@@ -84,7 +82,7 @@ def parabola(func, leftX, rightX, L, accuracy = 1e-2):
     b = (f2 - a) / (x2 - x1)
     c = (f3 - a - b * (x3 - x1)) / ((x3 - x1 )*(x3 - x2))
     newX = (x1 + x2) / 2 - b / (2 * c)
-    while abs(x3 - x1) > dx and i < ITER_NUM:
+    while abs(x3 - x1) > dx:
         if newX > x2:
             if func(newX) > f2:
                 x3 = x2
@@ -105,7 +103,6 @@ def parabola(func, leftX, rightX, L, accuracy = 1e-2):
         c = (f3 - a - b * (x3 - x1)) / ((x3 - x1 )*(x3 - x2))
         newX = (x1 + x2) / 2 - b / (2 * c)
 
-        i += 1
     return func((x3 + x1) / 2)
 
 def midPoint(func, leftX, rightX, L, accuracy = 1e-2):
@@ -180,19 +177,19 @@ def brokenLines(func, leftX, rightX, L, accuracy = 1e-2):
 
     return func(xOpt)
 
-# func = lambda x: np.sin(x) * (x - 1) ** 2
-# funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
-# a = -4
-# b = 0
+func = lambda x: np.sin(x) * (x - 1) ** 2
+funcDeriv = lambda x: (x-1) * (2 * np.sin(x) + (x-1) * np.cos(x)) 
+a = -4
+b = 0
 
-# L = 35
+L = 35
 
 
 # print(enumeration(func, a, b, L))
 # print(bitWise(func, a, b, L))
 # print(dichotomy(func, a, b, L))
 # print(goldenRatio(func, a, b, L))
-# print(parabola(func, a, b, L))
+print(parabola(func, a, b, L))
 # print(midPoint(func, a, b, L))
 # print(newton(func, a, b, L))
 # print(markwardt(func, a, b, L))
