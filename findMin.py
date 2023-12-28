@@ -8,7 +8,7 @@ def enumeration(func, leftX, rightX, L, accuracy = 1e-2):
     while x < rightX:
         minVal = min(minVal, func(x))
         x += dx
-    return x-dx, minVal
+    return minVal
 
 def bitWise(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
