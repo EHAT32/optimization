@@ -12,16 +12,17 @@ def enumeration(func, leftX, rightX, L, accuracy = 1e-2):
 
 def bitWise(func, leftX, rightX, L, accuracy = 1e-2):
     dx = accuracy / L
+    step = dx
     x = leftX
     minVal = func(leftX)
     while x < rightX:
         if func(x) > minVal:
-            if 2 * accuracy > dx:
+            if 2 * step > dx:
                 return func((x + x - dx) / 2)
             else:
-                dx *= -0.25
+                step *= -0.25
         minVal = min(minVal, func(x))
-        x += dx
+        x += step
     return minVal
 
 def dichotomy(func, leftX, rightX, L, accuracy = 1e-2):
@@ -38,7 +39,6 @@ def dichotomy(func, leftX, rightX, L, accuracy = 1e-2):
             a = xLeft
         xLeft = (a + b) / 2 - delta
         xRight = (a + b) / 2 + delta
-        # print(xRight - xLeft - 2 * delta)
     return func((a + b) / 2)
 
 def goldenRatio(func, leftX, rightX, L, accuracy = 1e-2):
@@ -185,12 +185,13 @@ b = 0
 L = 35
 
 
+
 # print(enumeration(func, a, b, L))
 # print(bitWise(func, a, b, L))
 # print(dichotomy(func, a, b, L))
 # print(goldenRatio(func, a, b, L))
-print(parabola(func, a, b, L))
+# print(parabola(func, a, b, L))
 # print(midPoint(func, a, b, L))
 # print(newton(func, a, b, L))
 # print(markwardt(func, a, b, L))
-# print(brokenLines(func, a, b, L))
+print(brokenLines(func, a, b, L))
